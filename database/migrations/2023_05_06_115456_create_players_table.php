@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string('image_path');
             $table->string('gender');
             $table->date('date_of_birth');
-            $table->string('position');
+            $table->string('position')->nullable();
             $table->foreignIdFor(Country::class);
+            $table->unsignedBigInteger('api_id');
             $table->timestamps();
         });
     }

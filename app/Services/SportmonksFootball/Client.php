@@ -20,13 +20,15 @@ class Client
      *
      * @return RequestException|PlayerCollection|null
      */
-    public function getPlayers(): RequestException|PlayerCollection|null
+    public function getPlayers(int $currentPage = 1): RequestException|PlayerCollection|null
     {
         $response = Http::get(
             url: "{$this->uri}/players",
             query: [
                 'api_token' => $this->token,
-                'include' => 'position;country;'
+                'include' => 'position;country;',
+                'per_page' => 50,
+                'currentPage' => 1
             ]
         );
 

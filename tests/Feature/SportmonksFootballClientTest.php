@@ -23,6 +23,7 @@ class SportmonksFootballClientTest extends TestCase
         for ($i = 0; $i < $randomLimit; $i++) {
 
             $country = [
+                'id' => $i,
                 'name' => $this->faker->country,
                 'image_path' => $this->faker->imageUrl
             ];
@@ -32,6 +33,7 @@ class SportmonksFootballClientTest extends TestCase
             ];
 
             $data[] = [
+                'id' => $i,
                 'firstname' => $firstName = $this->faker->firstName,
                 'lastname' => $lastName = $this->faker->lastName,
                 'display_name' => "$firstName $lastName",
@@ -53,12 +55,14 @@ class SportmonksFootballClientTest extends TestCase
 
         $this->assertNotEmpty($players);
         foreach ($players as $index => $player){
+            $this->assertEquals($player->apiId, $data[$index]['id']);
             $this->assertEquals($player->firstName, $data[$index]['firstname']);
             $this->assertEquals($player->lastName, $data[$index]['lastname']);
             $this->assertEquals($player->displayName, $data[$index]['display_name']);
             $this->assertEquals($player->imagePath, $data[$index]['image_path']);
             $this->assertEquals($player->dateOfBirth, Carbon::parse($data[$index]['date_of_birth']));
             $this->assertEquals($player->position, $data[$index]['position']['name'] ?? null);
+            $this->assertEquals($player->country->apiId, $data[$index]['country']['id']);
             $this->assertEquals($player->country->name, $data[$index]['country']['name']);
             $this->assertEquals($player->country->imagePath, $data[$index]['country']['image_path']);
         }

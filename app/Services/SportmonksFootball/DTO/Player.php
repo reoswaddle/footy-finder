@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 class Player {
 
     public function __construct(
+        public readonly int $apiId,
         public readonly string $firstName,
         public readonly string $lastName,
         public readonly string $displayName,

@@ -2,7 +2,6 @@
 
 namespace App\Services\SportmonksFootball;
 
-use App\Services\Concerns\HasFake;
 use App\Services\SportmonksFootball\Actions\CreatePlayer;
 use App\Services\SportmonksFootball\Collections\PlayerCollection;
 use Illuminate\Http\Client\RequestException;
@@ -10,8 +9,6 @@ use Illuminate\Support\Facades\Http;
 
 class Client
 {
-    use HasFake;
-
     public function __construct(
         protected string $uri,
         protected string $token,

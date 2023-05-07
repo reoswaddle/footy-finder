@@ -3,7 +3,10 @@
 namespace App\Services\SportmonksFootball;
 
 use App\Services\SportmonksFootball\Actions\CreatePlayer;
+use App\Services\SportmonksFootball\Actions\CreatePlayersResponse;
 use App\Services\SportmonksFootball\Collections\PlayerCollection;
+use App\Services\SportmonksFootball\DTO\Pagination;
+use App\Services\SportmonksFootball\DTO\PlayerResponse;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 
@@ -18,9 +21,8 @@ class Client
     /**
      * Gets players
      *
-     * @return RequestException|PlayerCollection|null
      */
-    public function getPlayers(int $currentPage = 1): RequestException|PlayerCollection|null
+    public function getPlayers(int $currentPage = 1): RequestException|PlayerResponse|null
     {
         $response = Http::get(
             url: "{$this->uri}/players",
@@ -28,24 +30,14 @@ class Client
                 'api_token' => $this->token,
                 'include' => 'position;country;',
                 'per_page' => 50,
-                'currentPage' => 1
+                'current_page' => 1
             ]
         );
-
-        $collection = new PlayerCollection();
-        foreach ($response->collect('data') as $item) {
-            $player = CreatePlayer::handle(
-                item: $item,
-            );
-            $collection->add(
-                item: $player,
-            );
-        }
 
         if (! $response->successful()) {
             return $response->toException();
         }
 
-        return $collection;
+        return CreatePlayersResponse::handle($response);
     }
 }

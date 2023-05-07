@@ -47,14 +47,20 @@ class SportmonksFootballClientTest extends TestCase
 
         $uri = config('services.sportmonks-football.uri');
         Http::fake([
-            "$uri/*" => Http::response(['data' => $data]),
+            "$uri/*" => Http::response([
+                'data' => $data,
+                'pagination' => [
+                    'current_page' => 1,
+                    'has_more' => false,
+                ],
+            ]),
         ]);
 
         $client = new Client($uri, 'test-token');
-        $players = $client->getPlayers();
+        $playersResponse = $client->getPlayers();
 
-        $this->assertNotEmpty($players);
-        foreach ($players as $index => $player){
+        $this->assertNotEmpty($playersResponse->data);
+        foreach ($playersResponse->data as $index => $player){
             $this->assertEquals($player->apiId, $data[$index]['id']);
             $this->assertEquals($player->firstName, $data[$index]['firstname']);
             $this->assertEquals($player->lastName, $data[$index]['lastname']);

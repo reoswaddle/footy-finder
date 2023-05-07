@@ -6,7 +6,7 @@ use App\Services\SportmonksFootball\Actions\CreatePlayer;
 use App\Services\SportmonksFootball\Actions\CreatePlayersResponse;
 use App\Services\SportmonksFootball\Collections\PlayerCollection;
 use App\Services\SportmonksFootball\DTO\Pagination;
-use App\Services\SportmonksFootball\DTO\PlayerResponse;
+use App\Services\SportmonksFootball\DTO\PlayersResponse;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 
@@ -22,7 +22,7 @@ class Client
      * Gets players
      *
      */
-    public function getPlayers(int $currentPage = 1): RequestException|PlayerResponse|null
+    public function getPlayers(int $currentPage = 1): RequestException|PlayersResponse|null
     {
         $response = Http::get(
             url: "{$this->uri}/players",

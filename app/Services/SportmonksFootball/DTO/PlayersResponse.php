@@ -4,7 +4,7 @@ namespace App\Services\SportmonksFootball\DTO;
 
 use App\Services\SportmonksFootball\Collections\PlayerCollection;
 
-class PlayerResponse {
+class PlayersResponse {
 
     public function __construct(
         public readonly PlayerCollection $data,

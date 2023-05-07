@@ -57,10 +57,10 @@ class SportmonksFootballClientTest extends TestCase
         ]);
 
         $client = new Client($uri, 'test-token');
-        $playersResponse = $client->getPlayers();
+        $players = $client->getPlayers();
 
-        $this->assertNotEmpty($playersResponse->data);
-        foreach ($playersResponse->data as $index => $player){
+        $this->assertNotEmpty($players->data);
+        foreach ($players->data as $index => $player){
             $this->assertEquals($player->apiId, $data[$index]['id']);
             $this->assertEquals($player->firstName, $data[$index]['firstname']);
             $this->assertEquals($player->lastName, $data[$index]['lastname']);

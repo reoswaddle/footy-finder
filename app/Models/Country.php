@@ -9,6 +9,9 @@ class Country extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'image_path', 'api_id'];
+
+
     /**
      * A country has many players
      *

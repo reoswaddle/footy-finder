@@ -22,7 +22,7 @@ class Client
      * Gets players
      *
      */
-    public function getPlayers(int $currentPage = 1): RequestException|Players|null
+    public function getPlayers(int $page = 1): RequestException|Players|null
     {
         $response = Http::get(
             url: "{$this->uri}/players",
@@ -30,7 +30,7 @@ class Client
                 'api_token' => $this->token,
                 'include' => 'position;country;',
                 'per_page' => 50,
-                'current_page' => 1
+                'page' => $page
             ]
         );
 

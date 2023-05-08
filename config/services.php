@@ -33,6 +33,7 @@ return [
     'sportmonks-football' => [
         'uri' => env('SPORTMONKS_FOOTBALL_API_URI', 'https://api.sportmonks.com/v3/football'),
         'token' => env('SPORTMONKS_FOOTBALL_API_TOKEN'),
+        'max-requests-per-hour' => env('SPORTMONKS_FOOTBALL_API_REQUESTS_PER_HOUR', 3000),
     ]
 
 ];

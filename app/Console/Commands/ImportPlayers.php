@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Services\SportmonksFootball\Client;
+use App\Services\SportmonksFootball\Jobs\ImportPlayersJob;
 use Illuminate\Console\Command;
 
 class ImportPlayers extends Command
@@ -27,6 +28,6 @@ class ImportPlayers extends Command
     public function handle(Client $client)
     {
         //
-        (new \App\Services\SportmonksFootball\Actions\ImportPlayers())->__invoke($client);
+        ImportPlayersJob::dispatch();
     }
 }

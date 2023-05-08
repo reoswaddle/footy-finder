@@ -4,6 +4,7 @@ namespace App\Services\SportmonksFootball\Jobs;
 
 use App\Models\Country;
 use App\Models\Player;
+use App\Services\SportmonksFootball\Client;
 use App\Services\SportmonksFootball\Collections\PlayerCollection;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,19 +16,21 @@ class ImportPlayersJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private PlayerCollection $players;
+    private int $page;
 
-    public function __construct(PlayerCollection $players)
+    public function __construct(int $page = 1)
     {
-        $this->players = $players;
+        $this->page = $page;
     }
 
     /**
      * Execute the job.
      */
-    public function handle()
+    public function handle(Client $client)
     {
-        foreach ($this->players as $player) {
+        $players = $client->getPlayers($this->page);
+
+        foreach ($players->data as $player) {
             $country = Country::query()->updateOrCreate(
                 [
                     'api_id' => $player->country->apiId,
@@ -54,6 +57,18 @@ class ImportPlayersJob implements ShouldQueue
                     'country_id' => $country->id,
                 ]
             );
+        }
+
+        if ($players->pagination->hasMore) {
+            $nextPage = $this->page + 1;
+            $requestsPerHour = config('services.sportmonks-football.max-requests-per-hour');
+            $secondsPerHour = 3600;
+            $waitTime = $secondsPerHour / $requestsPerHour;
+
+            // Wait for the calculated time before dispatching the next job
+            usleep($waitTime * 1000000); // Multiply by 1,000,000 to convert seconds to microseconds
+
+            self::dispatch($nextPage);
         }
     }
 }

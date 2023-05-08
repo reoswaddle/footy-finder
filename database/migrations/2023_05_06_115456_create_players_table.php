@@ -14,14 +14,14 @@ return new class extends Migration
     {
         Schema::create('players', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('display_name');
-            $table->string('image_path');
-            $table->string('gender');
-            $table->date('date_of_birth');
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->string('display_name')->nullable();
+            $table->string('image_path')->nullable();
+            $table->string('gender')->nullable();
+            $table->date('date_of_birth')->nullable();
             $table->string('position')->nullable();
-            $table->foreignIdFor(Country::class);
+            $table->foreignIdFor(Country::class)->nullable();
             $table->unsignedBigInteger('api_id');
             $table->timestamps();
         });

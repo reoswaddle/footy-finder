@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image_path');
+            $table->string('name')->nullable();
+            $table->string('image_path')->nullable();
             $table->unsignedBigInteger('api_id');
             $table->timestamps();
         });

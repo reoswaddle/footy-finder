@@ -16,12 +16,16 @@
             <tr>
                 <td>{{ $player->display_name }}</td>
                 <td>{{ $player->gender}}</td>
-                <td>{{ $player->date_of_bith }}</td>
+                <td>{{ $player->date_of_birth }}</td>
                 <td>{{ $player->position }}</td>
                 <td>{{ $player->country->name }}</td>
             </tr>
         @endforeach
         </tbody>
     </table>
+
+    <div class="d-flex justify-content-center">
+    {{ $players->links() }}
+    </div>
 @endsection
 

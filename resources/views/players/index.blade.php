@@ -4,11 +4,10 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th scope="col">Country</th>
-            <th scope="col">Display Name</th>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
             <th scope="col">Gender</th>
             <th scope="col">Age</th>
-            <th scope="col">Birthday</th>
             <th scope="col">Position</th>
         </tr>
         </thead>
@@ -19,7 +18,6 @@
                 <td> <a href="/players/{{$player->id}}" > {{ $player->displayName }} </a> </td>
                 <td>{{ $player->gender}}</td>
                 <td>{{ $player->age }}</td>
-                <td>{{ $player->birthday }}</td>
                 <td>{{ $player->position }}</td>
             </tr>
         @endforeach

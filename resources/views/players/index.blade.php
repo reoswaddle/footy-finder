@@ -4,21 +4,23 @@
     <table class="table table-striped">
         <thead>
         <tr>
+            <th scope="col">Country</th>
             <th scope="col">Display Name</th>
             <th scope="col">Gender</th>
             <th scope="col">Age</th>
+            <th scope="col">Birthday</th>
             <th scope="col">Position</th>
-            <th scope="col">Country</th>
         </tr>
         </thead>
         <tbody>
         @foreach ($players as $player)
             <tr>
-                <td>{{ $player->display_name }}</td>
+                <td class="text-center"> <img width="25" src="{{ $player->country->imagePath }}"  alt="{{ $player->country->name }} Flag"/></td>
+                <td> <a href="/players/{{$player->id}}" > {{ $player->displayName }} </a> </td>
                 <td>{{ $player->gender}}</td>
-                <td>{{ $player->date_of_birth }}</td>
+                <td>{{ $player->age }}</td>
+                <td>{{ $player->birthday }}</td>
                 <td>{{ $player->position }}</td>
-                <td>{{ $player->country->name }}</td>
             </tr>
         @endforeach
         </tbody>

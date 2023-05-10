@@ -17,7 +17,7 @@ class PlayerController extends Controller
             ->orderBy('last_name')
             ->paginate(10);
 
-        // Replace collection instances with DTO Players
+        // Replace collection of LengthAwarePaginator class with DTO Player instances
         $players = $players->setCollection(
             $players->getCollection()->map(function (Player $player) {
                 return  CreatePlayerDTO::handle($player);

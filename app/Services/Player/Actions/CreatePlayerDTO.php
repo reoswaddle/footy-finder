@@ -21,7 +21,7 @@ class CreatePlayerDTO
             displayName: $player->display_name ?? "$player->first_name $player->last_name",
             imagePath: $player->image_path,
             gender: Str::ucfirst($player->gender),
-            birthday: $dateOfBirth->format('d-m-Y'),
+            birthday: $dateOfBirth->format('d F Y'),
             age: $dateOfBirth->diff(now())->format('%y'),
             position: $player->position ?? null,
             country: CreateCountryDTO::handle($player->country)

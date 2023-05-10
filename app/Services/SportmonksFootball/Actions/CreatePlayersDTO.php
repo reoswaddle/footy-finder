@@ -2,7 +2,6 @@
 
 namespace App\Services\SportmonksFootball\Actions;
 
-use App\Services\SportmonksFootball\Collections\PlayerCollection;
 use App\Services\SportmonksFootball\DTO\PaginationDTO;
 use App\Services\SportmonksFootball\DTO\PlayersDTO;
 
@@ -10,24 +9,19 @@ class CreatePlayersDTO
 {
     public static function handle(\Illuminate\Http\Client\Response $response): PlayersDTO
     {
-        $playerCollection = new PlayerCollection();
+        $playersData = $response->collect('data');
+        $playerCollection = $playersData->map(function ($item) {
+            return CreatePlayerDTO::handle(item: $item);
+        });
 
-        foreach ($response->collect('data') as $item) {
-            $player = CreatePlayerDTO::handle(
-                item: $item,
-            );
-            $playerCollection->add(
-                item: $player,
-            );
-        }
+        $pagination = $response->object()->pagination;
 
         return new PlayersDTO(
             data: $playerCollection,
             pagination:  new PaginationDTO(
-                currentPage: $response->object()->pagination->current_page,
-                hasMore: $response->object()->pagination->has_more,
+                currentPage: $pagination->current_page,
+                hasMore: $pagination->has_more,
             )
         );
-
     }
 }

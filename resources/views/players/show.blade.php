@@ -13,6 +13,7 @@
                         <li class="list-group-item"> Country: {{ $player->position }} </li>
                         <li class="list-group-item"> Age: {{ $player->age }} </li>
                         <li class="list-group-item"> Birthday: {{ $player->birthday }} </li>
+                        <li class="list-group-item"> <a href="{{ url()->previous() }}" class="btn btn-secondary"> Back </a></li>
                     </ul>
                 </div>
             </div>

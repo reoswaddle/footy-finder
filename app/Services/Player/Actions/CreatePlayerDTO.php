@@ -24,9 +24,7 @@ class CreatePlayerDTO
             birthday: $dateOfBirth->format('d-m-Y'),
             age: $dateOfBirth->diff(now())->format('%y'),
             position: $player->position ?? null,
-            country: new CountryDTO(
-                name: $player->country->name,
-                imagePath: $player->country->image_path),
+            country: CreateCountryDTO::handle($player->country)
         );
     }
 }

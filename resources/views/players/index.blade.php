@@ -3,20 +3,22 @@
     <h2 class="mb-4">Players</h2>
 
     <form class="row g-3" method="get" action="/players" enctype="multipart/form-data">
-        <div class="col-sm-2">
-            <input type="text" class="form-control" name="first_name" placeholder="Player First Name" aria-label="Play Name">
+        <div class="col-sm-4">
+            <select class="form-select" aria-label="Default select example" name="country">
+                <option value="" selected>Country</option>
+                @foreach($countries as $country)
+                    <option value="{{$country->id}}"> {{ $country->name }} </option>
+                @endforeach
+
+            </select>
         </div>
         <div class="col-sm-4">
             <input type="text" class="form-control" name="last_name" placeholder="Player Last Name" aria-label="Play Name">
         </div>
-        <div class="col-sm-4">
-            <select class="form-select" aria-label="Default select example" name="country">
-                <option value="" selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-            </select>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" name="first_name" placeholder="Player First Name" aria-label="Play Name">
         </div>
+
         <div class="col-sm">
             <button type="submit" class="btn btn-primary w-100">Search</button>
         </div>

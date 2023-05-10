@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\Country;
 use App\Models\Player;
+use App\Services\Player\Actions\CreateCountryDTO;
 use App\Services\Player\Actions\CreatePlayerDTO;
 
 class PlayerController extends Controller
@@ -15,12 +17,21 @@ class PlayerController extends Controller
             ->orderBy('last_name')
             ->paginate(10);
 
+        // Replace collection instances with DTO Players
+        $players = $players->setCollection(
+            $players->getCollection()->map(function (Player $player) {
+                return  CreatePlayerDTO::handle($player);
+            })
+        );
+
+        // Get list of countries for player search component
+        $countries = Country::query()->distinct()->orderBy('name')->get()->map(function (Country $country) {
+            return  CreateCountryDTO::handle($country);
+        });
+
         return  view('players.index', [
-            'players' => $players->setCollection(
-                $players->getCollection()->map(function (Player $player) {
-                    return  CreatePlayerDTO::handle($player);
-                })
-            )
+            'players' => $players,
+            'countries' => $countries
         ]);
     }
 

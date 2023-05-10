@@ -3,17 +3,17 @@
 namespace App\Services\SportmonksFootball\Actions;
 
 use App\Services\SportmonksFootball\Collections\PlayerCollection;
-use App\Services\SportmonksFootball\DTO\Pagination;
-use App\Services\SportmonksFootball\DTO\Players;
+use App\Services\SportmonksFootball\DTO\PaginationDTO;
+use App\Services\SportmonksFootball\DTO\PlayersDTO;
 
-class CreatePlayers
+class CreatePlayersDTO
 {
-    public static function handle(\Illuminate\Http\Client\Response $response): Players
+    public static function handle(\Illuminate\Http\Client\Response $response): PlayersDTO
     {
         $playerCollection = new PlayerCollection();
 
         foreach ($response->collect('data') as $item) {
-            $player = CreatePlayer::handle(
+            $player = CreatePlayerDTO::handle(
                 item: $item,
             );
             $playerCollection->add(
@@ -21,9 +21,9 @@ class CreatePlayers
             );
         }
 
-        return new Players(
+        return new PlayersDTO(
             data: $playerCollection,
-            pagination:  new Pagination(
+            pagination:  new PaginationDTO(
                 currentPage: $response->object()->pagination->current_page,
                 hasMore: $response->object()->pagination->has_more,
             )

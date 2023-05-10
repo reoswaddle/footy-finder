@@ -5,7 +5,7 @@ namespace App\Services\SportmonksFootball\DTO;
 
 use Illuminate\Support\Carbon;
 
-class Player {
+class PlayerDTO {
 
     public function __construct(
         public readonly int $apiId,
@@ -16,7 +16,7 @@ class Player {
         public readonly ?string $gender,
         public readonly ?Carbon $dateOfBirth,
         public readonly ?string $position,
-        public readonly ?Country $country,
+        public readonly ?CountryDTO $country,
     ){}
 
 }

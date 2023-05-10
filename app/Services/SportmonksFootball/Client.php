@@ -2,11 +2,11 @@
 
 namespace App\Services\SportmonksFootball;
 
-use App\Services\SportmonksFootball\Actions\CreatePlayer;
-use App\Services\SportmonksFootball\Actions\CreatePlayers;
+use App\Services\SportmonksFootball\Actions\CreatePlayerDTO;
+use App\Services\SportmonksFootball\Actions\CreatePlayersDTO;
 use App\Services\SportmonksFootball\Collections\PlayerCollection;
-use App\Services\SportmonksFootball\DTO\Pagination;
-use App\Services\SportmonksFootball\DTO\Players;
+use App\Services\SportmonksFootball\DTO\PaginationDTO;
+use App\Services\SportmonksFootball\DTO\PlayersDTO;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 
@@ -22,7 +22,7 @@ class Client
      * Gets players
      *
      */
-    public function getPlayers(int $page = 1): RequestException|Players|null
+    public function getPlayers(int $page = 1): RequestException|PlayersDTO|null
     {
         $response = Http::get(
             url: "{$this->uri}/players",
@@ -38,6 +38,6 @@ class Client
             return $response->toException();
         }
 
-        return CreatePlayers::handle($response);
+        return CreatePlayersDTO::handle($response);
     }
 }

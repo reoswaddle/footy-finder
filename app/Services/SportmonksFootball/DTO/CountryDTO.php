@@ -3,7 +3,7 @@
 namespace App\Services\SportmonksFootball\DTO;
 
 
-class Country {
+class CountryDTO {
 
     public function __construct(
         public readonly int $apiId,

@@ -4,11 +4,11 @@ namespace App\Services\SportmonksFootball\DTO;
 
 use App\Services\SportmonksFootball\Collections\PlayerCollection;
 
-class Players {
+class PlayersDTO {
 
     public function __construct(
         public readonly PlayerCollection $data,
-        public readonly Pagination $pagination,
+        public readonly PaginationDTO $pagination,
     ){}
 
 }

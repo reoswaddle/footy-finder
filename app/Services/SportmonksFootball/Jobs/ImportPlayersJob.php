@@ -65,7 +65,7 @@ class ImportPlayersJob implements ShouldQueue
             $secondsPerHour = 3600;
             $waitTime = $secondsPerHour / $requestsPerHour;
 
-            // Wait for the calculated time before dispatching the next job
+            // Wait for the calculated time before dispatching the next job to avoid hitting rate limit
             usleep($waitTime * 1000000); // Multiply by 1,000,000 to convert seconds to microseconds
 
             self::dispatch($nextPage);

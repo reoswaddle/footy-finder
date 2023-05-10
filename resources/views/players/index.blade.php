@@ -48,7 +48,7 @@
     </table>
 
     <div class="d-flex justify-content-center">
-        {{ $players->links() }}
+        {{ $players->appends($_GET)->links() }}
     </div>
 @endsection
 

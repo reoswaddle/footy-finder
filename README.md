@@ -11,22 +11,22 @@ To run the project locally, follow these steps:
 3. Copy `.env.example` to a new file named `.env`
 4. Add your Sportmonks API key to the `.env` file
 5. Run `./vendor/bin/sail up`
-6. Run `sail artisan migrate`
-7. Start the queue worker by running `sail artisan queue:work`
+6. Run `./vendor/bin/sail artisan migrate`
+7. Start the queue worker by running `./vendor/bin/sail artisan queue:work`
 
 ## Populate the Database
 
 To populate the database with player data, run:
 
 ```bash
-sail artisan app:import-players
+./vendor/bin/sail artisan app:import-players
 ```
 
 ## Keep the Database Up to Date
 To ensure that the database stays up to date, run the scheduler:
 
 ```bash
-sail artisan schedule:work
+./vendor/bin/sail artisan schedule:work
 ```
 
 This will update the database every night at midnight.

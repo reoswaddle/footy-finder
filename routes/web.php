@@ -19,3 +19,4 @@ Route::get('/', function () {
 
 
 Route::get('/players', [\App\Http\Controllers\PlayerController::class, 'index']);
+Route::get('/players/{player}', [\App\Http\Controllers\PlayerController::class, 'show']);

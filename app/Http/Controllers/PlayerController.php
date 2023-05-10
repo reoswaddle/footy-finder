@@ -8,7 +8,6 @@ use App\Services\Player\Actions\CreatePlayerDTO;
 
 class PlayerController extends Controller
 {
-    //
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         $players = Player::query()
@@ -22,6 +21,13 @@ class PlayerController extends Controller
                     return  CreatePlayerDTO::handle($player);
                 })
             )
+        ]);
+    }
+
+    public function show(Player $player): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    {
+        return  view('players.show', [
+            'player' => CreatePlayerDTO::handle($player)
         ]);
     }
 }

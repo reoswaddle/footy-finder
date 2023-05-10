@@ -11,10 +11,10 @@
                 @endforeach
             </select>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <input type="text" class="form-control" name="last_name" placeholder="Player Last Name" aria-label="Play Name" value="{{ request('last_name') }}">
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <input type="text" class="form-control" name="first_name" placeholder="Player First Name" aria-label="Play Name" value="{{ request('first_name') }}">
         </div>
 

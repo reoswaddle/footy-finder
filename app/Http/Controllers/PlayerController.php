@@ -28,7 +28,7 @@ class PlayerController extends Controller
                 return $query->where('last_name', "LIKE", "%{$search->lastName}%");
             })
             ->when($search->firstName, function ($query) use($search) {
-                return $query->where('first_name', $search->firstName);
+                return $query->where('first_name',"LIKE", "%{$search->firstName}%");
             })
 
             ->paginate(10);

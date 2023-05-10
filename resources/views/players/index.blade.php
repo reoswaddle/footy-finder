@@ -3,13 +3,12 @@
     <h2 class="mb-4">Players</h2>
 
     <form class="row g-3" method="get" action="/players" enctype="multipart/form-data">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <select class="form-select" aria-label="Default select example" name="country">
                 <option value="">Country</option>
                 @foreach($countries as $country)
                     <option value="{{$country->id}}" @if($country->id == request('country')) selected @endif> {{ $country->name }} </option>
                 @endforeach
-
             </select>
         </div>
         <div class="col-sm-4">
@@ -21,6 +20,9 @@
 
         <div class="col-sm">
             <button type="submit" class="btn btn-primary w-100">Search</button>
+        </div>
+        <div class="col-sm">
+            <a href="/players" class="btn btn-danger w-100">Reset</a>
         </div>
     </form>
 

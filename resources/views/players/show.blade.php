@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="card">
+    <div class="card border-0">
         <div class="row g-0">
             <div class="col-md-4">
                 <img src="{{$player->imagePath}}" class="card-img-top" alt="{{$player->displayName}}">

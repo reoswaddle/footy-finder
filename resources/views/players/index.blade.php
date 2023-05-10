@@ -5,18 +5,18 @@
     <form class="row g-3" method="get" action="/players" enctype="multipart/form-data">
         <div class="col-sm-4">
             <select class="form-select" aria-label="Default select example" name="country">
-                <option value="" selected>Country</option>
+                <option value="">Country</option>
                 @foreach($countries as $country)
-                    <option value="{{$country->id}}"> {{ $country->name }} </option>
+                    <option value="{{$country->id}}" @if($country->id == request('country')) selected @endif> {{ $country->name }} </option>
                 @endforeach
 
             </select>
         </div>
         <div class="col-sm-4">
-            <input type="text" class="form-control" name="last_name" placeholder="Player Last Name" aria-label="Play Name">
+            <input type="text" class="form-control" name="last_name" placeholder="Player Last Name" aria-label="Play Name" value="{{ request('last_name') }}">
         </div>
         <div class="col-sm-2">
-            <input type="text" class="form-control" name="first_name" placeholder="Player First Name" aria-label="Play Name">
+            <input type="text" class="form-control" name="first_name" placeholder="Player First Name" aria-label="Play Name" value="{{ request('first_name') }}">
         </div>
 
         <div class="col-sm">

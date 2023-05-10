@@ -14,9 +14,9 @@ class CreateSearchDTO
     public static function handle(array $request): SearchDTO
     {
         return new SearchDTO(
-            countryId: $request['country'],
-            lastName: $request['last_name'],
-            firstName: $request['first_name'],
+            countryId: $request['country'] ?? null,
+            lastName: $request['last_name'] ?? null,
+            firstName: $request['first_name'] ?? null,
         );
     }
 }

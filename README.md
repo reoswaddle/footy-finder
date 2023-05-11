@@ -34,4 +34,8 @@ This will update the database every night at midnight.
 ## Planned Improvements
 - Implement caching for Countries and Players, so that constant calls to the database are not required after the initial request.
 - Integrate a logging tool to monitor updates to the database from the API export.
+- Find out and amend null types in importer tool. (sportmonks documentation wasn't very clear about types)
+- Exception handling for the import tool so that the import doesn't get interrupted.
 - Add feature tests for controller methods and routes to ensure the proper functionality and stability of the application.
+- Middleware on laravel jobs to better scale rate limit handling
+- 
